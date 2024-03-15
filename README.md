@@ -1,5 +1,6 @@
 # GVC
-General Video Converter
+# General Video Converter
+<img src="icon.jpg" width="500" height="600">
 This Python script utilizes PyQt5, a set of Python bindings for the Qt application framework, to create a simple video converter application with a graphical user interface (GUI). The application allows users to select input video files, specify output settings such as file type, resolution, frame rate, and bitrate, and convert the videos accordingly.
 
 Here's a breakdown of the key components and functionalities:
