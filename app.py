@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QFileDialog, QComboBox
-from PyQt5.QtGui import QIcon,QPalette, QColor
+from PyQt5.QtGui import QIcon, QColor
 from moviepy.editor import VideoFileClip
 import os
 
@@ -16,15 +16,14 @@ class VideoConverter(QWidget):
 
         # Set application icon
         self.setWindowIcon(QIcon('D:/Projects/Converter/icon.jpg'))  # Provide the path to your icon file
-       
+
         # Set background color of the main window
         self.setAutoFillBackground(True)
         p = self.palette()
-        #p.setColor(self.backgroundRole(), QColor('#357482'))
         self.setPalette(p)
+
         # Set background color of elements
-        element_background_color ="background-color: rgba(0, 0, 0, 0);"
-        
+        element_background_color = "background-color: rgba(0, 0, 0, 0);"
 
         self.input_path_label = QLabel("Input Video Paths:")
         self.input_path_edit = QLineEdit()
@@ -48,9 +47,13 @@ class VideoConverter(QWidget):
         self.mp4_video_codec_combo.addItems(["libx264", "mpeg4"])
         self.mp4_video_codec_combo.setStyleSheet(element_background_color)
 
-        self.resolution_label = QLabel("Resolution (Width x Height):")
-        self.resolution_edit = QLineEdit()
-        self.resolution_edit.setStyleSheet(element_background_color)
+        self.resolution_label = QLabel("Resolution:")
+        self.width_edit = QLineEdit()
+        self.width_edit.setStyleSheet(element_background_color)
+        self.width_edit.setPlaceholderText("Width")
+        self.height_edit = QLineEdit()
+        self.height_edit.setStyleSheet(element_background_color)
+        self.height_edit.setPlaceholderText("Height")
 
         self.fps_label = QLabel("FPS:")
         self.fps_edit = QLineEdit()
@@ -96,7 +99,8 @@ class VideoConverter(QWidget):
         layout.addWidget(self.mp4_video_codec_combo)
 
         layout.addWidget(self.resolution_label)
-        layout.addWidget(self.resolution_edit)
+        layout.addWidget(self.width_edit)
+        layout.addWidget(self.height_edit)
 
         layout.addWidget(self.fps_label)
         layout.addWidget(self.fps_edit)
@@ -136,7 +140,8 @@ class VideoConverter(QWidget):
         input_paths = self.input_path_edit.text().split(';')
         output_folder = self.output_folder_edit.text()
         file_type = self.file_type_combo.currentText()
-        resolution = tuple(map(int, self.resolution_edit.text().split('x')))
+        width = int(self.width_edit.text())
+        height = int(self.height_edit.text())
         fps = float(self.fps_edit.text())
         video_bitrate = self.video_bitrate_edit.text()
         total_bitrate = self.total_bitrate_edit.text()
@@ -161,14 +166,16 @@ class VideoConverter(QWidget):
                 video_clip = VideoFileClip(input_path)
                 output_filename = os.path.basename(input_path).split('.')[0] + '.' + file_type
                 output_path = os.path.join(output_folder, output_filename)
-                resized_clip = video_clip.resize(resolution)
+                resized_clip = video_clip.resize((width, height))
                 resized_clip.write_videofile(output_path, codec=video_codec, fps=fps, bitrate=total_bitrate,
-                                              audio_bitrate=audio_bitrate, audio_fps=audio_sample_rate, audio_codec=audio_codec)
+                                              audio_bitrate=audio_bitrate, audio_fps=audio_sample_rate,
+                                              audio_codec=audio_codec)
                 video_clip.close()
                 resized_clip.close()
                 print(f"Conversion of {input_path} successful!")
             except Exception as e:
                 print(f"Conversion of {input_path} failed: {str(e)}")
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
