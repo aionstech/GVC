@@ -16,3 +16,7 @@ Video Conversion: Upon clicking the "Convert" button, the application reads the 
 Error Handling: The application includes error handling mechanisms to handle exceptions that may occur during the conversion process. If a conversion fails, the application prints an error message indicating the cause of the failure.
 
 Overall, this video converter application provides a user-friendly interface for converting videos with customizable output settings. It demonstrates the capabilities of PyQt5 for creating GUI applications and integrates seamlessly with external libraries like moviepy for multimedia processing tasks.
+
+# Python 3.10.x: Ensure that Python 3.10.x is installed on the system.
+# PyQt5: The application uses PyQt5 for the graphical user interface. You can install it via pip:
+<code>pip install PyQt5 </code>
