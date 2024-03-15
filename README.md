@@ -19,10 +19,15 @@ Overall, this video converter application provides a user-friendly interface for
 # Requirements
 1-Python 3.10.x: Ensure that Python 3.10.x is installed on the system.
 </hr>
+
 2-PyQt5: The application uses PyQt5 for the graphical user interface. You can install it via pip:
 <code>pip install PyQt5 </code>
+
 </hr>
+
 3-moviepy: The application uses moviepy for video editing functionalities. You can install it via pip:
 <code>pip install moviepy </code>
+
 </hr>
+
 4-FFmpeg: moviepy requires FFmpeg to be installed on the system for video editing operations. You can download it from the official FFmpeg website: https://ffmpeg.org/download.html. Make sure to add FFmpeg to the system's PATH environment variable.
